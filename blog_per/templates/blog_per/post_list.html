@@ -1,0 +1,41 @@
+{% extends 'blog_per/base.html' %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+
+<html>
+    <head>
+        <title>Damian Siepka Blog</title>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog_per/blog_per.css' %}">
+    </head>
+    <body>
+      <div class="page-header">
+    <img src="{% static 'img/logo.png' %}" alt="logo" />
+    <h1><a href="/">Damian Siepka</a></h1>
+</div>
+
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+
+          {% block content %}
+        {% for post in posts %}
+            <div class="post">
+                <div class="date">
+                    {{ post.published_date }}
+                </div>
+                <h1><a href="{% url 'blog_per.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <p>{{ post.text|safe|linebreaks }}</p>
+            </div>
+        {% endfor %}
+    {% endblock content %}
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>

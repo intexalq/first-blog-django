@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<html>
+    <head>
+        <title>Damian Siepka</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog_per/blog_per.css' %}">
+    </head>
+    <body>
+    <div class="page-header">
+        {% if user.is_authenticated %}
+          <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+          <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+          <img src="{% static 'img/logo.png' %}" alt="logo" />
+        {% else %}
+          <img src="{% static 'img/logo.png' %}" alt="logo" />
+        {% endif %}
+        <h1><a href="{% url 'blog_per.views.post_list' %}">Damian Siepka</a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
